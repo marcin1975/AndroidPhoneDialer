@@ -2,12 +2,15 @@ package com.example.marcin.androidphonedialer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import java.util.regex.*;
 
 
@@ -31,7 +34,8 @@ public class AndroidPhoneDialer extends Activity {
                     /** Finally start the Activity */
                     startActivity(DialIntent);
                 } else {
-                    showAlert("Please enter a phone number in the X-XXX-XXX-XXXX format.", 0, "Format Error", "Re-enter Number", false);
+                    showAlert();
+                    //Toast.makeText(getApplicationContext(), "Please enter a phone number in the X-XXX-XXX-XXXX format.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -45,7 +49,19 @@ public class AndroidPhoneDialer extends Activity {
         return matcher.matches();
     }
 
-    public void showAlert()
+    public void showAlert() {
+        AlertDialog alertDialog1 = new AlertDialog.Builder(this).create();
+        alertDialog1.setTitle("ALERT!!!"); // set Dialog Title
+        alertDialog1.setMessage("An error occurred!"); // Set Dialog Message
+        // Set OK Button
+        alertDialog1.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alertDialog1.show();
+    }
+    //public void showAlert()
     /**
      * Implement This:
      *
